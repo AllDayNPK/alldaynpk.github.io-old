@@ -8,25 +8,17 @@
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
 	  .container {
 		max-width: 960px;
 	  }
 	  .lh-condensed {
 	    line-height: 1.25;
+	  }
+	  .recommendations-panel {
+		display: none;
+	  }
+	  .form1-form-panel {
+		margin-bottom: 20px;
 	  }
     </style>
   </head>
@@ -34,34 +26,20 @@
     <div class="container">
   <div class="py-5 text-center">
     <h2>Turf fertilizer calculations</h2>
-    <p class="lead">Below is a collection of useful turf fertilier calculations that you can use to determine the appropriate amount of fertilizer to use based on soil test nutrient values.</p>
+    <p class="lead">Based on soil test nutrient values, you can use this collection of turf fertilier calculations to determine the appropriate amount of fertilizer to use.</p>
   </div>
 
   <div class="row">
-    <div class="col-md-4 order-md-2 mb-4">
-      <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Your recommendations</span>
-      </h4>
-      <ul class="list-group mb-3">
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Pounds to apply</h6>
-            <small class="text-muted">Per 1000 square feet</small>
-          </div>
-          <span class="text-muted">4.4</span>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-8 order-md-1">
+    <div class="col-md-8 order-md-1 form1-form-panel">
       <h4 class="mb-3">PPM needed <em><strong>to</strong></em> fertilizer recommendation</h4>
-      <form class="needs-validation" novalidate>
+      <form id="f1" class="needs-validation" action="" autocomplete="off" novalidate>
         <div class="row">
 		  <div class="col-md-5 mb-3">
             <label for="f1Nutrient">Nutrient</label>
             <select class="custom-select d-block w-100" id="f1Nutrient" required>
               <option value="">Choose...</option>
-              <option>Phosphorus</option>
-			  <option>Potassium</option>
+              <option value="2.3">Phosphorus</option>
+			  <option value="1.2">Potassium</option>
             </select>
             <div class="invalid-feedback">
               Please select a nutrient.
@@ -85,8 +63,22 @@
           </div>
         </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Calculate</button>
+        <button class="btn btn-primary btn-lg btn-block calc1-submit" type="submit">Calculate</button>
       </form>
+    </div>
+	<div class="col-md-4 order-md-2 mb-4 recommendations-panel">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your recommendations</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Pounds to apply</h6>
+            <small class="text-muted">Per 1000 square feet</small>
+          </div>
+          <span class="text-muted f1Result"></span>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -119,6 +111,45 @@
       }, false)
     })
   }, false)
+  
+  $("#f1").on("submit", function( event ){
+	var self = $(this);
+	var validSubmission = self.get(0).checkValidity();
+	var recos = $(".recommendations-panel");
+	recos.hide();
+	
+	var ppmNeed =  $("#f1PpmNeeded").val();
+	var calc1PctInBag =  $("#f1PctFertInBag").val();
+	var calc1PctInBagDecimal;
+	var elementalOffset = $("#f1Nutrient").val();
+	var calc1Result = $(".f1Result");
+	const oneThousandSqFtPerAcre = 43.56;
+	
+	if(calc1PctInBag % 1 != 0) // NOT whole number
+	{
+		calc1PctInBagDecimal = parseFloat(calc1PctInBag);
+	}
+	else {
+		calc1PctInBagDecimal = parseFloat(calc1PctInBag / 100);
+	}
+	
+	// the main formula!
+	// PPM is half an acre, hence why we multiply the needed PPM by 2, then later devide by 1000 square feet per acre
+	// the formula uses an elemental offset because the nutrient on a bag of fertlizer is not the exact elemental nutrient
+	var fertNeed = ((ppmNeed * 2 * elementalOffset) / calc1PctInBagDecimal) / oneThousandSqFtPerAcre;
+	
+	// round the recommendation
+	fertNeed = Math.round((fertNeed + Number.EPSILON) * 100) / 100;
+	
+	calc1Result.text(fertNeed);
+		
+	if(validSubmission)
+	{
+		recos.show();
+		return false;
+	}
+  });
+  
 }())
 </script></body>
 </html>
