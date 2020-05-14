@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Useful turf fertilizer calculators to help you plan applications.">
+    <title>All Day NPK Turf Fertilizer Calculators</title>
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+  <div class="py-5 text-center">
+    <h2>Turf fertilizer calculations</h2>
+    <p class="lead">Below is a collection of useful turf fertilier calculations that you can use to determine the appropriate amount of fertilizer to use based on soil test nutrient values.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your recommendations</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Pounds to apply</h6>
+            <small class="text-muted">Per 1000 square feet</small>
+          </div>
+          <span class="text-muted">4.4</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">PPM needed <em><strong>to</strong></em> fertilizer recommendation</h4>
+      <form class="needs-validation" novalidate>
+        <div class="row">
+		  <div class="col-md-5 mb-3">
+            <label for="f1Nutrient">Nutrient</label>
+            <select class="custom-select d-block w-100" id="f1Nutrient" required>
+              <option value="">Choose...</option>
+              <option>Phosphorus</option>
+			  <option>Potassium</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a nutrient.
+            </div>
+          </div>
+		</div>
+		<div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="f1PpmNeeded">PPM needed</label>
+            <input type="number" class="form-control" id="f1PpmNeeded" placeholder="" value="" min="0" max="3000" required>
+            <div class="invalid-feedback">
+              Please enter a valid PPM needed value.<br />Must be a whole number from 0-3000.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="f1PctFertInBag">% of this nutrient in fertilizer bag</label>
+            <input type="number" class="form-control" id="f1PctFertInBag" placeholder="" value="" min="0" max="100" step="any" required>
+            <div class="invalid-feedback">
+              Please enter a valid % of this nutrient in your bag of fertilizer.<br /><br />It can be expressed as a whole number or a decimal from 0 to 100. We'll figure it out from there!
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Calculate</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2020 All Day NPK</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="https://thelawnforum.com/viewtopic.php?f=24&t=1088">Source of soil nutrient calculations</a></li>
+    </ul>
+  </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="form-validation.js"></script></body>
+</html>
