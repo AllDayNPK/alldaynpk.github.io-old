@@ -17,7 +17,7 @@
 	  .recommendations-panel {
 		display: none;
 	  }
-	  .form1-form-panel {
+	  .form-panel {
 		margin-bottom: 20px;
 	  }
     </style>
@@ -29,9 +29,14 @@
     <p class="lead">Based on soil test nutrient values, you can use this collection of turf fertilier calculations to determine the appropriate amount of fertilizer to use.</p>
   </div>
 
+  <!-- form 1 -->
   <div class="row">
-    <div class="col-md-8 order-md-1 form1-form-panel">
-      <h4 class="mb-3">PPM needed <em><strong>to</strong></em> fertilizer recommendation</h4>
+    <div class="col-md-8 order-md-1 form-panel">
+	  <h4 class="mb-3"><button type="button" data-target="#form1" data-toggle="collapse" class="btn btn-secondary">Calculator 1: PPM needed to fertilizer recommendation</button></h4>
+	</div>
+  </div>
+  <div class="row collapse" id="form1">
+    <div class="col-md-8 order-md-1 form-panel">
       <form id="f1" class="needs-validation" action="" autocomplete="off" novalidate>
         <div class="row">
 		  <div class="col-md-5 mb-3">
@@ -49,13 +54,13 @@
 		<div class="row">
           <div class="col-md-6 mb-3">
             <label for="f1PpmNeeded">PPM needed</label>
-            <input type="number" class="form-control" id="f1PpmNeeded" placeholder="" value="" min="0" max="3000" required>
+            <input type="number" class="form-control" id="f1PpmNeeded" placeholder="" value="" min="0" step="any" required>
             <div class="invalid-feedback">
               Please enter a valid PPM needed value.<br />Must be a whole number from 0-3000.
             </div>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="f1PctFertInBag">% of this nutrient in fertilizer bag</label>
+            <label for="f1PctFertInBag" title="It can be expressed as a whole number or a decimal from 0 to 100. We'll figure it out from there!">% of this nutrient in fertilizer bag</label>
             <input type="number" class="form-control" id="f1PctFertInBag" placeholder="" value="" min="0" max="100" step="any" required>
             <div class="invalid-feedback">
               Please enter a valid % of this nutrient in your bag of fertilizer.<br /><br />It can be expressed as a whole number or a decimal from 0 to 100. We'll figure it out from there!
@@ -66,7 +71,7 @@
         <button class="btn btn-primary btn-lg btn-block calc1-submit" type="submit">Calculate</button>
       </form>
     </div>
-	<div class="col-md-4 order-md-2 mb-4 recommendations-panel">
+	<div class="col-md-4 order-md-2 mb-4 recommendations-panel recos-1">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your recommendations</span>
       </h4>
@@ -81,6 +86,67 @@
       </ul>
     </div>
   </div>
+  <!-- end form 1 -->
+  <!-- form 2 -->
+  <div class="row">
+    <div class="col-md-8 order-md-1 form-panel">
+      
+	  <h4 class="mb-3"><button type="button" data-target="#form2" data-toggle="collapse" class="btn btn-secondary">Calculator 2: Fertilizer applied to PPM increase</button></h4>
+	</div>
+  </div>
+  <div class="row collapse" id="form2">
+    <div class="col-md-8 order-md-1 form-panel">
+      <!--h4 class="mb-3"><a href="#f2" data-toggle="collapse">Calculator 2: Fertilizer applied to PPM increase</a></h4-->
+      <form id="f2" class="needs-validation" action="" autocomplete="off" novalidate>
+        <div class="row">
+		  <div class="col-md-5 mb-3">
+            <label for="f2Nutrient">Nutrient</label>
+            <select class="custom-select d-block w-100" id="f2Nutrient" required>
+              <option value="">Choose...</option>
+              <option value="0.44">Phosphorus</option>
+			  <option value="0.83">Potassium</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a nutrient.
+            </div>
+          </div>
+		</div>
+		<div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="f2PoundsApplied">Pounds of fert applied per 1000</label>
+            <input type="number" class="form-control" id="f2PoundsApplied" placeholder="" value="" min="0" step="any" required>
+            <div class="invalid-feedback">
+              Please enter valid pounds applied.<br />Must be greater than 0.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="f2PctFertInBag" title="It can be expressed as a whole number or a decimal from 0 to 100. We'll figure it out from there!">% of this nutrient in fertilizer bag</label>
+            <input type="number" class="form-control" id="f2PctFertInBag" placeholder="" value="" min="0" max="100" step="any" required>
+            <div class="invalid-feedback">
+              Please enter a valid % of this nutrient in your bag of fertilizer.<br /><br />It can be expressed as a whole number or a decimal from 0 to 100. We'll figure it out from there!
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block calc1-submit" type="submit">Calculate</button>
+      </form>
+    </div>
+	<div class="col-md-4 order-md-2 mb-4 recommendations-panel recos-2">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your recommendations</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">PPM increase</h6>
+            <small class="text-muted"></small>
+          </div>
+          <span class="text-muted f2Result"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end form 2 -->
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2020 All Day NPK</p>
@@ -112,36 +178,38 @@
     })
   }, false)
   
+  const oneThousandSqFtPerAcre = 43.56;
+  
+  // form 1
+  
   $("#f1").on("submit", function( event ){
 	var self = $(this);
 	var validSubmission = self.get(0).checkValidity();
-	var recos = $(".recommendations-panel");
+	var recos = $(".recos-1");
 	recos.hide();
 	
 	var ppmNeed =  $("#f1PpmNeeded").val();
-	var calc1PctInBag =  $("#f1PctFertInBag").val();
-	var calc1PctInBagDecimal;
+	var pctInBag =  $("#f1PctFertInBag").val();
+	var pctInBagDecimal;
 	var elementalOffset = $("#f1Nutrient").val();
-	var calc1Result = $(".f1Result");
-	const oneThousandSqFtPerAcre = 43.56;
+	var calcResult = $(".f1Result");
 	
-	if(calc1PctInBag % 1 != 0) // NOT whole number
+	if(pctInBag % 1 != 0) // NOT whole number
 	{
-		calc1PctInBagDecimal = parseFloat(calc1PctInBag);
+		pctInBagDecimal = parseFloat(pctInBag);
 	}
 	else {
-		calc1PctInBagDecimal = parseFloat(calc1PctInBag / 100);
+		pctInBagDecimal = parseFloat(pctInBag / 100);
 	}
 	
 	// the main formula!
 	// PPM is half an acre, hence why we multiply the needed PPM by 2, then later devide by 1000 square feet per acre
 	// the formula uses an elemental offset because the nutrient on a bag of fertlizer is not the exact elemental nutrient
-	var fertNeed = ((ppmNeed * 2 * elementalOffset) / calc1PctInBagDecimal) / oneThousandSqFtPerAcre;
+	var fertNeed = ((ppmNeed * 2 * elementalOffset) / pctInBagDecimal) / oneThousandSqFtPerAcre;
 	
-	// round the recommendation
-	fertNeed = Math.round((fertNeed + Number.EPSILON) * 100) / 100;
+	fertNeed = RoundReco(fertNeed);
 	
-	calc1Result.text(fertNeed);
+	calcResult.text(fertNeed);
 		
 	if(validSubmission)
 	{
@@ -149,6 +217,44 @@
 		return false;
 	}
   });
+  
+  // form 2
+  $("#f2").on("submit", function( event ){
+	var self = $(this);
+	var validSubmission = self.get(0).checkValidity();
+	var recos = $(".recos-2");
+	recos.hide();
+	
+	var f2PoundsApplied =  $("#f2PoundsApplied").val();
+	var pctInBag =  $("#f2PctFertInBag").val();
+	var pctInBagDecimal;
+	var elementalOffset = $("#f2Nutrient").val();
+	var calcResult = $(".f2Result");
+	
+	if(pctInBag % 1 != 0) // NOT whole number
+	{
+		pctInBagDecimal = parseFloat(pctInBag);
+	}
+	else {
+		pctInBagDecimal = parseFloat(pctInBag / 100);
+	}
+	
+	var ppmIncrease = (f2PoundsApplied * elementalOffset * 0.5 * oneThousandSqFtPerAcre) / 2;
+	
+	ppmIncrease = RoundReco(ppmIncrease);
+	
+	calcResult.text(ppmIncrease);
+		
+	if(validSubmission)
+	{
+		recos.show();
+		return false;
+	}
+  });
+  
+  var RoundReco = function(inputNumber) {
+	return Math.round((inputNumber + Number.EPSILON) * 100) / 100;
+  }
   
 }())
 </script></body>
